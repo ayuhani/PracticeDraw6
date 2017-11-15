@@ -34,6 +34,9 @@ public class Practice01Translation extends RelativeLayout {
         super(context, attrs, defStyleAttr);
     }
 
+    int transCount = SDK_INT > Build.VERSION_CODES.LOLLIPOP ? 6 : 4;
+    int transState = 0;
+
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -49,6 +52,32 @@ public class Practice01Translation extends RelativeLayout {
             @Override
             public void onClick(final View v) {
                 // TODO 在这里处理点击事件，通过 View.animate().translationX/Y/Z() 来让 View 平移
+                switch (transState) {
+                    case 0:
+                        imageView.animate().translationX(dpToPixel(100));
+                        break;
+                    case 1:
+                        imageView.animate().translationX(dpToPixel(0));
+                        break;
+                    case 2:
+                        imageView.animate().translationY(dpToPixel(50));
+                        break;
+                    case 3:
+                        imageView.animate().translationY(dpToPixel(0));
+                        break;
+                    case 4:
+                        if (SDK_INT > Build.VERSION_CODES.LOLLIPOP)
+                            imageView.animate().translationZ(dpToPixel(10));
+                        break;
+                    case 5:
+                        if (SDK_INT > Build.VERSION_CODES.LOLLIPOP)
+                            imageView.animate().translationZ(dpToPixel(0));
+                        break;
+                }
+                transState++;
+                if (transState == transCount) {
+                    transState = 0;
+                }
             }
         });
     }

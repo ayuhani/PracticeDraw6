@@ -26,6 +26,8 @@ public class Practice04Alpha extends RelativeLayout {
         super(context, attrs, defStyleAttr);
     }
 
+    int state = 0;
+
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -37,6 +39,15 @@ public class Practice04Alpha extends RelativeLayout {
             @Override
             public void onClick(final View v) {
                 // TODO 在这里处理点击事件，通过 View.animate().alpha() 来改变 View 的透明度
+                if (state == 0) {
+                    imageView.animate().alpha(0);
+                } else {
+                    imageView.animate().alpha(1);
+                }
+                state++;
+                if (state == 2) {
+                    state = 0;
+                }
             }
         });
     }
